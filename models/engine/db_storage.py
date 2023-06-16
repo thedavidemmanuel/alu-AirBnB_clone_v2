@@ -1,8 +1,8 @@
 #!/usr/bin/python3
-""" new class for sqlAlchemy """
+""" new class for SQLAlchemy """
 from os import getenv
 from sqlalchemy.orm import sessionmaker, scoped_session
-from sqlalchemy import (create_engine)
+from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from models.base_model import Base
 from models.state import State
@@ -14,7 +14,7 @@ from models.amenity import Amenity
 
 
 class DBStorage:
-    """ create tables in environmental"""
+    """ create tables in the database """
     __engine = None
     __session = None
 
@@ -35,7 +35,7 @@ class DBStorage:
     def all(self, cls=None):
         """returns a dictionary
         Return:
-            returns a dictionary of __object
+            returns a dictionary of objects
         """
         dic = {}
         if cls:
@@ -52,10 +52,10 @@ class DBStorage:
                 for elem in query:
                     key = "{}.{}".format(type(elem).__name__, elem.id)
                     dic[key] = elem
-        return (dic)
+        return dic
 
     def new(self, obj):
-        """add a new element in the table
+        """add a new element in the session
         """
         self.__session.add(obj)
 
@@ -65,7 +65,7 @@ class DBStorage:
         self.__session.commit()
 
     def delete(self, obj=None):
-        """delete an element in the table
+        """delete an element in the session
         """
         if obj:
             self.__session.delete(obj)
